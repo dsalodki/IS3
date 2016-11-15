@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace IS3.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -13,18 +14,10 @@ namespace IS3.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Logout()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            Request.GetOwinContext().Authentication.SignOut();
+            return Redirect("/");
         }
     }
 }
